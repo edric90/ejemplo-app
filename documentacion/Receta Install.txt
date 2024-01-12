@@ -60,7 +60,7 @@ Al realizar cualquier cambio en codigo, se puede verificar con la siguiente line
 git status
 
 Para actualizar el codigo: git add -A
-luego realizar commit: git commit -m "Sgunda actualizacion"
+luego realizar commit: git commit -m "Segunda actualizacion"
 para cargar los cambios actualizar: git push origin main
 
 Para descargar proyectos: git clon "url de proyecto"
@@ -69,3 +69,7 @@ Para descargar a mi maquina local cambios realizados por otras personas: git pul
 
 Para crear datos enb la base de datos: php artisan migrate (Crea las tablas definidas en DataBase/Migrations)
 
+Pagina para solución de problemas: https://stackoverflow.com/questions/37813568/git-remote-repository-not-found
+
+Activar Server:
+php artisan serve
