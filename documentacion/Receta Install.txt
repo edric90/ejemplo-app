@@ -1,0 +1,71 @@
+norvicsoftware.com/diagrama-entidad-relacion/
+
+https://stagingmultipago.multipago.com/api/v2/get_token
+
+postman://auth/callback?code=3b5e95dbc993054549f941ced01b8f60ba06353f54e9db0621d467b91c4bb25d
+
+Api Key Turbo for postman: PMAK-6466dc61038dee3efeaf2bdb-b3ad2fa11c5258473c4e6690053b93cbd5
+
+Mi Token Git: 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
+
+Instalaciòn de Laravel:
+
+1.- Instalar Apache con Php 8+
+2.- Bajar Composer-Setup (https://getcomposer.org/download/)
+3.- Instalar Composer-Setup
+4.- Para verificar instalación y version, abrir CMD y digitar: composer -v
+5.- Instalar GIT (https://git-scm.com/download/win) Click here to download (Realizar control de versiones) Instalar (todo por defecto)
+6.- Instalar GitHub.com o bitbucket.org
+
+GitHub:
+- Crear una cuenta (edric90@gmail.com - Exxxxxxo@1xx6x2x4)
+
+Instalacion de Laravel:
+
+Laravel.com
+Ir en documentacion a : #Your First Laravel Project
+
+Ir a la carpera de apache htdocs o www
+Crear una carpeta: proyectos-laravel
+dentro de la carpeta creada, ejecutar (cmd):
+
+composer create-project laravel/laravel ejemplo-app
+
+ó
+
+composer global require laravel/installer
+ 
+laravel new example-app
+
+C:\wamp\bin\php\php8.2.0;%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;C:\Program Files\Microsoft VS Code\bin;C:\composer;C:\Program Files\Git\cmd
+
+git init
+
+git config --global user.name "Tu nombre aquí"
+git config --global user.name "Edison Ricardo Caero Flores"
+
+git config --global user.email "tu_email_aquí@example.com"
+git config --global user.email "edri90@gmail.com"
+
+
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/edric90/ejemplo-app.git
+git push -u origin main
+
+Actualizando Git
+Al realizar cualquier cambio en codigo, se puede verificar con la siguiente linea el estado de GitHub
+
+git status
+
+Para actualizar el codigo: git add -A
+luego realizar commit: git commit -m "Sgunda actualizacion"
+para cargar los cambios actualizar: git push origin main
+
+Para descargar proyectos: git clon "url de proyecto"
+
+Para descargar a mi maquina local cambios realizados por otras personas: git pull origin main
+
+Para crear datos enb la base de datos: php artisan migrate (Crea las tablas definidas en DataBase/Migrations)
+
