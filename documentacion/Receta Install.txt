@@ -67,7 +67,19 @@ Para descargar proyectos: git clone "url de proyecto"
 
 Para descargar a mi maquina local cambios realizados por otras personas: git pull origin main
 
+(en caso de error de creacion de tablas - cuando se baja un proyecto CLONE)
+composer update
+php artisan key:generate
+
+
+Para crear Tablas en la base de datos: php artisan make:migration create_clients_table (Crea las tablas definidas en DataBase/Migrations)
+
 Para crear datos en la base de datos: php artisan migrate (Crea las tablas definidas en DataBase/Migrations)
+Para crear datos en la base de datos: php artisan migrate:fresh (elimina y Crea las tablas definidas en DataBase/Migrations)
+
+-- Pra crear los modelos:
+php artisan make:model Client
+
 
 Pagina para solución de problemas: https://stackoverflow.com/questions/37813568/git-remote-repository-not-found
 
