@@ -68,7 +68,7 @@ Para descargar proyectos: git clone "url de proyecto"
 Para descargar a mi maquina local cambios realizados por otras personas: git pull origin main
 
 (en caso de error de creacion de tablas - cuando se baja un proyecto CLONE)
-composer update
+En caso de error ejecutar: composer update (descarga todas las librerias incluidas en composer.json)
 php artisan key:generate
 
 
@@ -79,6 +79,9 @@ Para crear datos en la base de datos: php artisan migrate:fresh (elimina y Crea 
 
 -- Pra crear los modelos:
 php artisan make:model Client
+
+-- Llenar datos de prueba: seders
+Ejecutar seeders: php artisan db:seed
 
 
 Pagina para solución de problemas: https://stackoverflow.com/questions/37813568/git-remote-repository-not-found
