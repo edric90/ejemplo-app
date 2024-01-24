@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('gender',10);            
             $table->integer('age');
             $table->string('type',50);
-            $table->unsignedBigInteger('clients_id');
-            $table->foreign('clients_id')
+            $table->unsignedBigInteger('client_id');
+            $table->foreign('client_id')
             ->references('id')
             ->on('clients')
             ->onDelete('cascade');

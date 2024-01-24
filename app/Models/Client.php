@@ -10,7 +10,7 @@ class Client extends Model
 {
     use HasFactory;
     protected $table = ['clients'] ;
-    protected $fillable = ['first_name','last_name','address','zone','cell_phone'];
+    protected $fillable = ['first_name','last_name','cell_phone','zone','address'];
     public function pets():HasMany
     {
         return $this->hasMany(Pet::class);
