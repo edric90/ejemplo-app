@@ -60,7 +60,7 @@ Al realizar cualquier cambio en codigo, se puede verificar con la siguiente line
 git status
 
 Para actualizar el codigo: git add -A
-luego realizar commit: git commit -m "Segunda actualizacion"
+luego realizar commit: git commit -m "Segunday actualizacion"
 para cargar los cambios actualizar: git push origin main
 
 Para descargar proyectos: git clone "url de proyecto"

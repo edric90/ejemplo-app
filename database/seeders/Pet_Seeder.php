@@ -20,5 +20,14 @@ class Pet_Seeder extends Seeder
         $pet->type='Mestizo';
         $pet->client_id=1;
         $pet->save();
+
+        $pet1 = new Pet();
+        $pet1->name='Chester';
+        $pet1->color='Marron';
+        $pet1->gender='Macho';
+        $pet1->age=7;
+        $pet1->type='Mestizo';
+        $pet1->client_id=2;
+        $pet1->save();
     }
 }

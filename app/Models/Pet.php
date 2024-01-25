@@ -9,9 +9,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Pet extends Model
 {
     use HasFactory;
-    protected $tabla = ['pets'];
+    protected $tabla = 'pets';
     protected $fillable = ['name','color','gender','age','type','client_id'];
-    public function clients():BelongsTo
+    public function client():BelongsTo
     {
         return $this->belongsTo(Client::class);
     }
