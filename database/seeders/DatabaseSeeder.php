@@ -4,8 +4,9 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
+//use Illuminate\Support\Facades\DB;
+use App\Models\Client;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,7 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(Client_Seeder::class);
         $this->call(Pet_Seeder::class);
 
-        // \App\Models\User::factory(10)->create();
+        Client::factory(10)->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
