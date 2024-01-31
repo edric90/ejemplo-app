@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PetController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
@@ -20,9 +21,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
 Route::get("/clients",[ClientController::class,"index"]);
 Route::post("/clients",[ClientController::class,"store"]);
 Route::get("/clients/{clientId}",[ClientController::class,"show"]);
 Route::patch("/clients/{clientId}",[ClientController::class,"update"]);
 Route::delete("/clients/{clientId}",[ClientController::class,"destroy"]);
+
+Route::get("/pets",[PetController::class,"index"]);

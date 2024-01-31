@@ -52,6 +52,7 @@ class ClientController extends Controller
         $client->zone= $request->zone;
         $client->address= $request->address;
         $client->save();
+        return response()->json(['Message'=>'Cliente Actualizado']);
     }
 
     /**
@@ -59,8 +60,15 @@ class ClientController extends Controller
      */
     public function destroy(string $id)
     {
-        $client=Client::find($id);
-        $client->delete();
-
+        try {
+                $client=Client::find($id);
+                $client->delete();
+                return response()->json(['Message'=>'Cliente Eliminado']);
+        }
+        catch (\Exception $e) 
+        {
+            // Manejo de excepción general
+            return response()->json(['detalle' => $e->getMessage()], 500);
+        }
     }
 }
