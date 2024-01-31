@@ -45,7 +45,13 @@ class ClientController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $client=Client::find($id);
+        $client->first_name= $request->first_name;
+        $client->last_name= $request->last_name;
+        $client->cell_phone= $request->cell_phone;
+        $client->zone= $request->zone;
+        $client->address= $request->address;
+        $client->save();
     }
 
     /**
@@ -53,6 +59,8 @@ class ClientController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $client=Client::find($id);
+        $client->delete();
+
     }
 }

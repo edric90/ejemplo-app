@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::get("/clients",[ClientController::class,"index"]);
-
 Route::post("/clients",[ClientController::class,"store"]);
-
 Route::get("/clients/{clientId}",[ClientController::class,"show"]);
+Route::patch("/clients/{clientId}",[ClientController::class,"update"]);
+Route::delete("/clients/{clientId}",[ClientController::class,"destroy"]);
