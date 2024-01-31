@@ -19,7 +19,7 @@ class PetController extends Controller
         }
         catch (\Exception $e)
         {
-            return response()->json(["error"=> $e->getMessage()],400);
+            return response()->json(["Mensaje de error"=> $e->getMessage()],400);
         }
     }
 
@@ -38,11 +38,11 @@ class PetController extends Controller
         $pet->type = $request->type;
         $pet->client_id = $request->client_id;
         $pet->save();
-        return response()->json(["Mensage" => "Mascota Registrada"]);
+        return response()->json(["Mensaje" => "Datos de la Mascota Registrada"]);
         }
         catch(\Exception $e)
         {
-            return response()->json(["error"=> $e->getMessage()],500);
+            return response()->json(["Mensaje"=>"Error al registrar los datos de la mascota","error"=> $e->getMessage()],500);
         }
     }
 
@@ -67,6 +67,9 @@ class PetController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $validar = $request->validate([
+            "name" => "required"
+            ]);
         try
         {
             $pet = Pet::find($id);
@@ -76,11 +79,11 @@ class PetController extends Controller
             $pet->type = $request->type;
             $pet->client_id = $request->client_id;
             $pet->save();
-            return response()->json(["Mensage" => "Datos de Mascota Actualizados"]);
+            return response()->json(["Mensaje" => "Datos de Mascota Actualizados"],200);
         }
         catch(\Exception $e)
         {
-            return response()->json(["error"=> $e->getMessage()],500);
+            return response()->json(["Mensaje"=>"Error al actualizar datos de la Mascota".$validar,"error"=> $e->getMessage()],500);
         }
     }
 
@@ -97,7 +100,7 @@ class PetController extends Controller
         }
         catch(\Exception $e)
         {
-            return response()->json(["error"=> $e->getMessage()],500);
+            return response()->json(["Mensaje"=>"Los datos de la mascota no han podido ser eliminados","error"=> $e->getMessage()],500);
         }
     }
 }
