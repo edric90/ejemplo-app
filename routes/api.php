@@ -34,3 +34,4 @@ Route::patch("/pets/{pet_id}",[PetController::class,"update"]);
 Route::delete("/pets/{pet_id}",[PetController::class,"destroy"]);
 
 Route::get("/client-pet",[ClientPetController::class,"index"]);
+Route::get("/client-pet/{clientId}",[ClientPetController::class,"show"]);

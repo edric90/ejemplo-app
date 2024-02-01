@@ -31,7 +31,8 @@ class ClientPetController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $client = Client::where("id","=",$id)->with('pets')->get();
+        return response()->json($client);
     }
 
     /**
