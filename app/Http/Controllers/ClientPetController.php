@@ -30,7 +30,6 @@ class ClientPetController extends Controller
         ->get();
 
         return response()->json($pet); // retorna datos clientes y mascotas
-
     }
 
     /**
