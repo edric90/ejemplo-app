@@ -13,8 +13,22 @@ class ClientController extends Controller
      */
     public function index() // tipo: GET en postman, por que solo debuelve datos
     {
-        $clients = Client::all();
-        return response()->json($clients);
+        try 
+        {
+            $clients = Client::all();
+            if (is_null($clients)) 
+            {
+                return response()->json(['Error'=>404,'Mensaje'=>'Tabla sin registros']);
+            }
+            else
+            {
+                return response()->json($clients);
+            }
+        }
+        catch (\Exception $e) 
+        {
+            return response()->json(['Mensaje'=>'Error al desplegar datos','Error'=> $e->getMessage()],500);
+        }
     }
 
     /**
@@ -22,13 +36,29 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        $client = new Client();
-        $client->first_name= $request->first_name;
-        $client->last_name= $request->last_name;
-        $client->cell_phone= $request->cell_phone;
-        $client->zone= $request->zone;
-        $client->address=$request->address;
-        $client->save();
+        $request->validate([
+            'first_name'=> 'required|max:50|min:2',
+            'last_name'=> 'required|max:50|min:2',
+            'cell_phone'=> 'required|max:12|min:8',
+            'zone'=> 'required|max:100|min:2',
+            'address'=> 'required|max:100|min:2',
+        ]);
+
+        try 
+        {
+            $client = new Client();
+            $client->first_name= $request->first_name;
+            $client->last_name= $request->last_name;
+            $client->cell_phone= $request->cell_phone;
+            $client->zone= $request->zone;
+            $client->address=$request->address;
+            $client->save();
+            return response()->json(['Mensaje'=>'Cliente Registrado','Cliente'=>$client]);
+        }
+        catch (\Exception $e) 
+        {
+            return response()->json(['Mensaje'=> 'Datos del cliente NO registrados','Error'=> $e->getMessage()],500);
+        }
     }
 
     /**
@@ -45,14 +75,36 @@ class ClientController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $client=Client::find($id);
-        $client->first_name= $request->first_name;
-        $client->last_name= $request->last_name;
-        $client->cell_phone= $request->cell_phone;
-        $client->zone= $request->zone;
-        $client->address= $request->address;
-        $client->save();
-        return response()->json(['Message'=>'Cliente Actualizado']);
+        $request->validate([
+            'first_name'=> 'required|max:50|min:2',
+            'last_name'=> 'required|max:50|min:2',
+            'cell_phone'=> 'required|max:12|min:8',
+            'zone'=> 'required|max:100|min:2',
+            'address'=> 'required|max:100|min:2',
+        ]);
+        
+        try 
+        {
+            $client=Client::find($id);
+            if (is_null($client)) 
+            {
+                return response()->json(['Error'=>404,'Mensaje'=>'No existe el registro: '.$id]);
+            }
+            else
+            {
+                $client->first_name= $request->first_name;
+                $client->last_name= $request->last_name;
+                $client->cell_phone= $request->cell_phone;
+                $client->zone= $request->zone;
+                $client->address= $request->address;
+                $client->save();
+                return response()->json(['Cliente'=>$client,'Mensaje'=>'Cliente Actualizado']);
+            }
+        }
+        catch (\Exception $e) 
+        {
+            return response()->json(['Mensaje'=>'Error en actualización.','Error'=> $e->getMessage()]);
+        }
     }
 
     /**
@@ -60,10 +112,19 @@ class ClientController extends Controller
      */
     public function destroy(string $id)
     {
+
         try {
+                //$client=Client::find($id)->delete();
                 $client=Client::find($id);
-                $client->delete();
-                return response()->json(['Message'=>'Cliente Eliminado']);
+                if (is_null($client)) 
+                {
+                    return response()->json(['Error'=>404,'Mensaje'=>'No existe el registro: '.$id]);
+                }
+                else
+                {
+                    $client->delete();
+                    return response()->json(['Cliente'=>$client,'Mensaje'=>'los datos del Cliente han sido borrados']);
+                }
         }
         catch (\Exception $e) 
         {

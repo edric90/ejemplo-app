@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Client;
 use App\Models\Pet;
-use Illuminate\Support\Facades\DB;
 
 class ClientPetController extends Controller
 {
@@ -14,30 +13,14 @@ class ClientPetController extends Controller
      */
     public function index()
     {
-        //$client = Client::all(); //consulta de todos los clientes
-        //$client = Client::with('pets')->get(); //consulta de clientes y mascotas
+        $client = Client::with('pets')->get(); //consulta de clientes y mascotas
 
+/*
         // Consulta tabla (sql) clientes y mascotas
-        // $client = DB::table("clients")->Join("pets","clients.id","=","pets.client_id","inner")
-        // ->select("clients.*","pets.*")
-        // ->get();
-        //return response()->json($client); // retorna datos clientes y mascotas
-
-        //$pet = Pet::with('client')->get(); // retorna mascotas y clientes
-        // Consulta tabla (sql) mascotas y clientes
-        $pet = DB::table("pets")->Join("clients","clients.id","=","pets.client_id","inner")
-        ->select("pets.*","clients.*")
-        ->get();
-
-        return response()->json($pet); // retorna datos clientes y mascotas
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+        $client = DB::table("clients")->Join("pets","clients.id","=","pets.client_id","inner")
+        ->select("clients.*","pets.*")->get();
+*/
+        return response()->json($client); // retorna datos clientes y mascotas
     }
 
     /**
@@ -45,23 +28,42 @@ class ClientPetController extends Controller
      */
     public function show(string $id)
     {
-        $client = Client::where("id","=",$id)->with('pets')->get();
-        return response()->json($client);
+        try {
+        $data = Client::with('pets')->where('clients.id','=',$id)->get(); //consulta de clientes y mascotas
+        return response()->json($data);
+    } catch (\Exception $e) {
+        return response()->json(['message'=> $e->getMessage(),'Error'=>400,'Mensaje'=>'Error']);
+    }
+}
+ 
+    public function indexinv()
+    {
+        try 
+        {
+            $pet = Pet::with('client')->get(); //consulta de Mascotas y Clientes
+        }
+        catch (\Exception $e) 
+        {
+            return response()->json(['message'=> $e->getMessage(),'Error'=> 400,'Mensaje'=> 'Error']);
+        }
+/*
+        // Consulta tabla (sql) mascotas y clientes
+        $pet = DB::table("pets")->Join("clients","clients.id","=","pets.client_id","inner")
+        ->select("pets.*","clients.*")->get();
+*/
+        return response()->json($pet); // retorna datos clientes y mascotas
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function showinv(string $id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        try 
+        {
+            $pet = Pet::with('client')->where("pets.id","=",$id)->get();
+            return response()->json($pet);
+        }
+        catch (\Exception $e) 
+        {
+            return response()->json(["message"=> $e->getMessage(),"Error"=> 400,"Mensaje"=> "Error"]);
+        }
     }
 }

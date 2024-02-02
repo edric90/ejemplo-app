@@ -92,15 +92,23 @@ class PetController extends Controller
      */
     public function destroy(string $id)
     {
-        try
-        {
-            $pet = Pet::find($id);
-            $pet->delete();
-            return response()->json(["Mensaje"=> "Datos de Mascota eliminados"]);
+        try {
+            //$pet=Pet::find($id)->delete();
+            $pet=Pet::find($id);
+            if (is_null($pet)) 
+            {
+                return response()->json(['Error'=>404,'Mensaje'=>'No existe el registro: '.$id]);
+            }
+            else
+            {
+                $pet->delete();
+                return response()->json(['Mascota'=>$pet,'Mensaje'=>'los datos del Cliente han sido borrados']);
+            }
         }
-        catch(\Exception $e)
+        catch (\Exception $e) 
         {
-            return response()->json(["Mensaje"=>"Los datos de la mascota no han podido ser eliminados","error"=> $e->getMessage()],500);
+            // Manejo de excepción general
+            return response()->json(['detalle' => $e->getMessage()], 500);
         }
     }
 }
