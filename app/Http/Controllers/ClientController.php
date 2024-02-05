@@ -8,8 +8,8 @@ use App\Models\Client;
 
 class ClientController extends Controller
 {
-    /**
-     * Display a listing of the resource.
+    /*
+     * Display a listing of the resource for API's.
      */
     public function index() // tipo: GET en postman, por que solo debuelve datos
     {
@@ -22,7 +22,7 @@ class ClientController extends Controller
             }
             else
             {
-                return response()->json($clients);
+                return response()->json($clients); // retorna resultados a una api
             }
         }
         catch (\Exception $e) 
@@ -131,5 +131,37 @@ class ClientController extends Controller
             // Manejo de excepción general
             return response()->json(['detalle' => $e->getMessage()], 500);
         }
+    }
+
+    /*
+     * Display a listing of the resource for View's.
+     */
+    public function indexview() // tipo: GET en postman, por que solo debuelve datos
+    {
+        try 
+        {
+            $clients = Client::all();
+            if (is_null($clients)) 
+            {
+                return response()->json(['Error'=>404,'Mensaje'=>'Tabla sin registros']);
+            }
+            else
+            {
+                return view('clients.index',['clients'=>$clients]); // retorna resultados a una vista
+            }
+        }
+        catch (\Exception $e) 
+        {
+            return response()->json(['Mensaje'=>'Error al desplegar datos','Error'=> $e->getMessage()],500);
+        }
+    }
+
+        /**
+     * Display the specified resource.
+     */
+    public function showview(string $id)
+    {
+        $client=Client::find($id);
+        return view('clients.showview',['client'=>$client]); // retorna resultados a una vista
     }
 }

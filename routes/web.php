@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ClientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +16,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+//Route::get('clients',[ClientController::class,'indexview'])->name('clients.indexview');
+//Route::get('clients/{IdClient}',[ClientController::class,'showview'])->name('clients.showview');
+
+Route::controller(ClientController::class)->group(function () 
+{
+    Route::get("/clients", "indexview")->name('clients.indexview');
+    Route::get("/clients/{clientId}", "showview")->name('clients.showview');
 });
